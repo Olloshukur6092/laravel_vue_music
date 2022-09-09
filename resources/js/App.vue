@@ -7,9 +7,10 @@
 
 <script>
 import TheHeader from "./layouts/TheHeader.vue";  
+import HomeView from './components/HomeView.vue';
 
 export default {
-  components: { TheHeader },
+  components: { TheHeader, HomeView },
 };
 </script>
 

@@ -73,7 +73,10 @@ class SingerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $singer = $this->singerServices->editSingerService($id);
+        return response()->json([
+            'singer' => $singer
+        ]);
     }
 
     /**
@@ -85,7 +88,11 @@ class SingerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->singerServices->updateSingerService($request->name, $id);
+
+        return response()->json([
+            'message' => 'Updated successfully'
+        ]);
     }
 
     /**
@@ -96,6 +103,10 @@ class SingerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->singerServices->destroySingerService($id);
+
+        return response()->json([
+            'message' => 'Deleted successfully!'
+        ]);
     }
 }
