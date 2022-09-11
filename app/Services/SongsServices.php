@@ -15,11 +15,11 @@ class SongsServices {
     //this method Songs model get data
     public function songsIndexService()
     {
-        return $this->songModel->with(['singer', 'genre', 'lang'])->get();
+        return $this->songModel->orderby('id', 'desc')->with(['singer', 'genre', 'lang'])->get();
     }
 
     //this method Song Model saved data
-    public function songsStoreService($songName, $songTitle, $songDesc, $singerId, $songLangId, $songGenreId):void
+    public function songsStoreService($songName, $songTitle, $songDesc, $singerId, $songLangId, $songGenreId, $songDate):void
     {
         $this->songModel->create([
             'song_name' => $songName,
@@ -27,7 +27,8 @@ class SongsServices {
             'song_description' => $songDesc,
             'singer_id' => $singerId,
             'lang_id' => $songLangId,
-            'genre_id' => $songGenreId
+            'genre_id' => $songGenreId,
+            'song_date' => $songDate,
         ]);
     }
 }

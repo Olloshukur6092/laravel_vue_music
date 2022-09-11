@@ -1,7 +1,7 @@
 <template>
   <div class="row">
-    <div class="col-md-6 m-3">
-      <div v-if="table" class="card shadow mt-3 border-0">
+    <div class="col-md-6">
+      <div v-if="table" class="card shadow m-3 border-0">
         <div class="card-header bg-info text-white border-0">
           <h3 class="d-inline">All Singers</h3>
           <button class="btn btn-primary float" @click="addFormShow">
@@ -22,11 +22,11 @@
                 <td>{{ i + 1 }}</td>
                 <td>{{ singer.name }}</td>
                 <td>
-                  <button
+                  <!-- <button
                     class="btn btn-primary"
-                  >
-                    <router-link :to="{name: 'EditSinger', params: { singerId: singer.id }}" >Edit</router-link>
-                  </button>
+                  > -->
+                    <router-link class="btn btn-primary" :to="{name: 'EditSinger', params: { singerId: singer.id }}" >Edit</router-link>
+                  <!-- </button> -->
                   <button
                     class="btn btn-danger ms-1"
                     @click="deleteSinger(singer.id)"
@@ -39,7 +39,7 @@
           </table>
         </div>
       </div>
-      <div class="card" v-if="form">
+      <div class="card m-3" v-if="form">
         <div class="card-header bg-primary text-white border-0">
           <h3 class="d-inline">Add Singer</h3>
           <button
@@ -163,5 +163,6 @@ input {
 a {
   text-decoration: none;
   color: #fff;
+  font-size: 18px;
 }
 </style>

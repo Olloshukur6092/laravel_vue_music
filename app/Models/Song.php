@@ -17,6 +17,7 @@ class Song extends Model
         'genre_id',
         'song_img',
         'song_mp3',
+        'song_date',
         'view_count',
         'song_download',
     ];

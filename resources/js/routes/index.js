@@ -1,7 +1,11 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import TheSinger from '../components/TheSinger';
+import TheSinger from '../components/singers/TheSinger';
 import HomeView from '../components/HomeView';
-import EditSinger from '../components/EditSinger';
+import EditSinger from '../components/singers/EditSinger';
+import SongLang from '../components/songslang/SongsLang';
+import SongGenre from '../components/songgenre/SongGenre';
+import Songs from '../components/songs/Songs';
+import AddSong from '../components/songs/AddSong';
 
 const routes = [
     {
@@ -18,7 +22,26 @@ const routes = [
         path: '/singers/edit/:singerId',
         name: 'EditSinger',
         component: EditSinger,
-
+    },
+    {
+        path: '/song-lang',
+        name: 'SongLang',
+        component: SongLang,
+    },
+    {
+        path: '/song-genre',
+        name: 'SongGenre',
+        component: SongGenre,
+    },
+    {
+        path: '/songs',
+        name: 'Songs',
+        component: Songs,
+    },
+    {
+        path: '/song/add',
+        name: 'AddSong',
+        component: AddSong,
     },
 ];
 

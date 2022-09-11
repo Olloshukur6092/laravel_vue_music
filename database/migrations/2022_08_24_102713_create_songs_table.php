@@ -23,6 +23,7 @@ class CreateSongsTable extends Migration
             $table->foreignId('genre_id');
             $table->string('song_img');
             $table->string('song_mp3');
+            $table->string('song_date', 200);
             $table->bigInteger('view_count')->nullable();
             $table->bigInteger('song_download')->nullable();
             $table->boolean('status')->default(1);

@@ -45,7 +45,7 @@ class SongsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->songsServices->songsStoreService($request->song_name, $request->song_title, $request->song_desc, $request->singerId, $request->langId, $request->genreId);
+        $this->songsServices->songsStoreService($request->song_name, $request->song_title, $request->song_desc, $request->singerId, $request->langId, $request->genreId, $request->songDate);
         return response()->json([
             'message' => 'Songs saved'
         ]);
