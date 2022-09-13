@@ -70,7 +70,10 @@ class SongsController extends Controller
      */
     public function edit($id)
     {
-        // 
+        $song = $this->songsServices->editSongsService($id);
+        return response()->json([
+            'song' => $song, 
+        ]);
     }
 
     /**
@@ -82,7 +85,11 @@ class SongsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // 
+        $this->songsServices->updateSongsService($id, $request->songName, $request->songTitle, $request->songDesc, $request->singerId, $request->songLangId, $request->songGenreId, $request->songDate);
+
+        return response()->json([
+            'message' => 'Updated successfully',
+        ]);
     }
 
     /**
@@ -93,6 +100,9 @@ class SongsController extends Controller
      */
     public function destroy($id)
     {
-        // 
+        $this->songsServices->destroySongService($id);
+        return response()->json([
+            'message' => 'Deleted Successfully',
+        ]);
     }
 }

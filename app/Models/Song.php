@@ -12,9 +12,9 @@ class Song extends Model
         'song_name',
         'song_title',
         'song_description',
-        'singer_id',
-        'lang_id',
-        'genre_id',
+        'singers_id',
+        'singer_langs_id',
+        'singer_genres_id',
         'song_img',
         'song_mp3',
         'song_date',
@@ -24,15 +24,15 @@ class Song extends Model
 
     public function singer()
     {
-        return $this->belongsTo(Singer::class);
+        return $this->belongsTo(Singer::class, 'singers_id', 'id');
     }
     public function genre()
     {
-        return $this->belongsTo(SingerGenre::class);
+        return $this->belongsTo(SingerGenre::class, 'singer_genres_id', 'id');
     }
 
     public function lang()
     {
-        return $this->belongsTo(SingerLangs::class);
+        return $this->belongsTo(SingerLangs::class, 'singer_langs_id', 'id');
     }
 }

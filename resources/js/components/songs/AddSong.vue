@@ -13,10 +13,10 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label for="singerName">Lang name</label>
+                  <label for="langName">Lang name</label>
                   <select
                     name=""
-                    id="singerName"
+                    id="langName"
                     class="select form-select"
                     v-model="langId"
                   >
@@ -31,10 +31,10 @@
                   </select>
                 </div>
                 <div class="mb-3">
-                  <label for="singerName">Genre name</label>
+                  <label for="genreName">Genre name</label>
                   <select
                     name=""
-                    id="singerName"
+                    id="genreName"
                     class="select form-select"
                     v-model="genreId"
                   >

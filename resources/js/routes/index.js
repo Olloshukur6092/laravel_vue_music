@@ -6,6 +6,7 @@ import SongLang from '../components/songslang/SongsLang';
 import SongGenre from '../components/songgenre/SongGenre';
 import Songs from '../components/songs/Songs';
 import AddSong from '../components/songs/AddSong';
+import EditSong from '../components/songs/EditSong';
 
 const routes = [
     {
@@ -42,6 +43,11 @@ const routes = [
         path: '/song/add',
         name: 'AddSong',
         component: AddSong,
+    },
+    {
+        path: '/song/edit/:songId',
+        name: 'EditSong',
+        component: EditSong,
     },
 ];
 

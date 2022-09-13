@@ -40,7 +40,7 @@ class SingerServices
     }
 
     //this method Singer model data updated for
-    public function updateSingerService($singerName, $singerId): void
+    public function updateSingerService($singerId, $singerName): void
     {
         $this->singerModel->where(['id' => $singerId])->update(['name' => $singerName]);
     }

@@ -18,7 +18,7 @@ class CreateCommentsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->boolean('status')->default(1);
-            $table->foreignId('user_id');
+            $table->foreignId('users_id');
             $table->timestamps();
         });
     }

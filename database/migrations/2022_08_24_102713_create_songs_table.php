@@ -18,11 +18,11 @@ class CreateSongsTable extends Migration
             $table->string('song_name');
             $table->string('song_title');
             $table->text('song_description');
-            $table->foreignId('singer_id');
-            $table->foreignId('lang_id');
-            $table->foreignId('genre_id');
-            $table->string('song_img');
-            $table->string('song_mp3');
+            $table->foreignId('singers_id')->constrained()->onDelete('cascade');
+            $table->foreignId('singer_langs_id')->constrained()->onDelete('cascade');
+            $table->foreignId('singer_genres_id')->constrained()->onDelete('cascade');
+            $table->string('song_img')->nullable();
+            $table->string('song_mp3')->nullable();
             $table->string('song_date', 200);
             $table->bigInteger('view_count')->nullable();
             $table->bigInteger('song_download')->nullable();
