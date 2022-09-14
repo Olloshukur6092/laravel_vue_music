@@ -20,8 +20,14 @@ class SongsServices
     }
 
     //this method Song Model saved data
-    public function songsStoreService($songName, $songTitle, $songDesc, $singerId, $songLangId, $songGenreId, $songDate): void
+    public function songsStoreService($songName, $songTitle, $songDesc, $singerId, $songLangId, $songGenreId, $songImg, $songMp3, $songDate): void
     {
+        $songImageName = time() . '.' . $songImg->extension();
+        $songMp3Name = time() . '.' . $songMp3->extension();
+        $songMp3Path = '/storage/mp3/' . $songMp3Name;
+        $songPath = '/storage/uploads/' . $songImageName;
+        $songImg->storeAs('uploads', $songImageName, 'public');
+        $songMp3->storeAs('mp3', $songMp3Name, 'public');
         $this->songModel->create([
             'song_name' => $songName,
             'song_title' => $songTitle,
@@ -29,6 +35,8 @@ class SongsServices
             'singers_id' => $singerId,
             'singer_langs_id' => $songLangId,
             'singer_genres_id' => $songGenreId,
+            'song_img' => $songPath,
+            'song_mp3' => $songMp3Path,
             'song_date' => $songDate,
         ]);
     }

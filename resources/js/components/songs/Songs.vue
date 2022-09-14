@@ -19,6 +19,7 @@
                 <th>Singer name</th>
                 <th>Song lang</th>
                 <th>Song genre</th>
+                <th>Image</th>
                 <th>Song date</th>
                 <th style="width: 7%">Song view count</th>
                 <th style="width: 8%">Song download count</th>
@@ -34,6 +35,9 @@
                 <td>{{ song.singer.name }}</td>
                 <td>{{ song.lang.lang_name }}</td>
                 <td>{{ song.genre.genre_name }}</td>
+                <td>
+                  <img :src="song.song_img" alt="No Image" class="img-fluid" />
+                </td>
                 <td>{{ song.song_date }}</td>
                 <td>0</td>
                 <td>0</td>
