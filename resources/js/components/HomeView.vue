@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-center">The Home Page</h1>
+  <h1 class="text-center">Dashboard</h1>
 </template>
 
 <script>

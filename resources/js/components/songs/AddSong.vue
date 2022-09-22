@@ -135,6 +135,7 @@
 </template>
 
 <script>
+import { adminUrl } from '../../constant/url';
 export default {
   data() {
     return {
@@ -160,7 +161,7 @@ export default {
   methods: {
     // get All Singer
     getSingerAll() {
-      this.axios.get("http://localhost:8000/api/singer").then((response) => {
+      this.axios.get(`${adminUrl}/singer`).then((response) => {
         this.singers = response.data.singers;
       });
     },
@@ -168,7 +169,7 @@ export default {
     // get Lang All
     getLangAll() {
       this.axios
-        .get("http://localhost:8000/api/songslang")
+        .get(`${adminUrl}/songslang`)
         .then((response) => {
           this.langs = response.data.lang;
           console.log(response);
@@ -181,7 +182,7 @@ export default {
     // get Genre all
     getGenreAll() {
       this.axios
-        .get("http://localhost:8000/api/songsgenre")
+        .get(`${adminUrl}/songsgenre`)
         .then((response) => {
           this.genres = response.data.genres;
           console.log(response);
@@ -194,7 +195,7 @@ export default {
     // Add Song
     addSong() {
       this.axios
-        .post("http://localhost:8000/api/songs", {
+        .post(`${adminUrl}/songs`, {
           song_name: this.songName,
           song_title: this.songTitle,
           song_desc: this.songDesc,

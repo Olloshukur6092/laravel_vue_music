@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import { adminUrl } from '../../constant/url';
 export default {
   name: "TheSinger",
   data() {
@@ -88,7 +89,7 @@ export default {
   methods: {
     getSingerData() {
       this.axios
-        .get("http://localhost:8000/api/singer")
+        .get(`${adminUrl}/singer`)
         .then((response) => {
           this.singers = response.data.singers;
           console.log(this.singers);
@@ -100,7 +101,7 @@ export default {
 
     addSinger() {
       this.axios
-        .post("http://localhost:8000/api/singer", { name: this.singerName })
+        .post(`${adminUrl}/singer`, { name: this.singerName })
         .then((response) => {
           if (response.data.message) {
             this.back();
@@ -117,7 +118,7 @@ export default {
 
     deleteSinger(singerId) {
       this.axios
-        .delete(`http://localhost:8000/api/singer/${singerId}`)
+        .delete(`${adminUrl}/singer/${singerId}`)
         .then((response) => {
           console.log(response);
           // this.getSingerData()

@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { adminUrl } from '../../constant/url';
 export default {
   data() {
     return {
@@ -70,7 +71,7 @@ export default {
   methods: {
     getGenreData() {
       this.axios
-        .get("http://localhost:8000/api/songsgenre")
+        .get(`${adminUrl}/songsgenre`)
         .then((response) => {
           console.log(response);
           this.genres = response.data.genres
@@ -82,7 +83,7 @@ export default {
 
     // add Song Genre
     addSongGenre() {
-      this.axios.post('http://localhost:8000/api/songsgenre', { genre_name: this.genreName }).then((response) => {
+      this.axios.post(`${adminUrl}/songsgenre`, { genre_name: this.genreName }).then((response) => {
         if (response.data.message) {
           this.hideGenreForm()
           this.getGenreData()

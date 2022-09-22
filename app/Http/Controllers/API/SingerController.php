@@ -88,10 +88,19 @@ class SingerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->singerServices->updateSingerService($request->name, $id);
-
+        $message = '';
+        $status = 0;
+        $update = $this->singerServices->updateSingerService($id, $request->name);
+        if ($update) {
+            $message = 'Updated SuccessFully';
+            $status = 1;
+        } else {
+            $message = 'No Updated';
+            $status = 0;
+        }
         return response()->json([
-            'message' => 'Updated successfully'
+            'message' => $message,
+            'status' => $status
         ]);
     }
 

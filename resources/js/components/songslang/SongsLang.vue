@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { adminUrl } from '../../constant/url';
 export default {
   data() {
     return {
@@ -71,7 +72,7 @@ export default {
     // get All Songs
     getLangsData() {
       this.axios
-        .get("http://localhost:8000/api/songslang")
+        .get(`${adminUrl}/songslang`)
         .then((response) => {
           console.log(response);
           this.songsLang = response.data.lang;
@@ -84,7 +85,7 @@ export default {
     // Add Songs Lang
     addSongLang() {
       this.axios
-        .post("http://localhost:8000/api/songslang", {
+        .post(`${adminUrl}/songslang`, {
           lang_name: this.langName,
         })
         .then((response) => {

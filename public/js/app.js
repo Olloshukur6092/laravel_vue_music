@@ -22984,13 +22984,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _layouts_TheHeader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/TheHeader.vue */ "./resources/js/layouts/TheHeader.vue");
-/* harmony import */ var _components_HomeView_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/HomeView.vue */ "./resources/js/components/HomeView.vue");
-
+ // import HomeView from './components/HomeView.vue';
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    TheHeader: _layouts_TheHeader_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    HomeView: _components_HomeView_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    TheHeader: _layouts_TheHeader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -23022,10 +23020,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _constant_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../constant/url */ "./resources/js/constant/url.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      singerName: ""
+      singerName: "",
+      error: ''
     };
   },
   mounted: function mounted() {
@@ -23035,7 +23036,7 @@ __webpack_require__.r(__webpack_exports__);
     getSingerDataId: function getSingerDataId(singerId) {
       var _this = this;
 
-      this.axios.get("http://localhost:8000/api/singer/".concat(singerId, "/edit")).then(function (response) {
+      this.axios.get("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/singer/").concat(singerId, "/edit")).then(function (response) {
         console.log(response);
         _this.singerName = response.data.singer[0].name;
       })["catch"](function (err) {
@@ -23045,13 +23046,19 @@ __webpack_require__.r(__webpack_exports__);
     updateSinger: function updateSinger() {
       var _this2 = this;
 
-      this.axios.put("http://localhost:8000/api/singer/".concat(this.$route.params.singerId), {
+      this.axios.put("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/singer/").concat(this.$route.params.singerId), {
         name: this.singerName
       }).then(function (response) {
-        if (response.data.message) {
+        console.log(response);
+
+        if (response.data.status == 1) {
           _this2.$router.push({
             name: "Singer"
           });
+        }
+
+        if (response.data.status == 0) {
+          _this2.error = response.data.message;
         }
       })["catch"](function (err) {
         console.log(err);
@@ -23073,6 +23080,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _constant_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../constant/url */ "./resources/js/constant/url.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "TheSinger",
   data: function data() {
@@ -23090,7 +23099,7 @@ __webpack_require__.r(__webpack_exports__);
     getSingerData: function getSingerData() {
       var _this = this;
 
-      this.axios.get("http://localhost:8000/api/singer").then(function (response) {
+      this.axios.get("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/singer")).then(function (response) {
         _this.singers = response.data.singers;
         console.log(_this.singers);
       })["catch"](function (err) {
@@ -23100,7 +23109,7 @@ __webpack_require__.r(__webpack_exports__);
     addSinger: function addSinger() {
       var _this2 = this;
 
-      this.axios.post("http://localhost:8000/api/singer", {
+      this.axios.post("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/singer"), {
         name: this.singerName
       }).then(function (response) {
         if (response.data.message) {
@@ -23120,7 +23129,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteSinger: function deleteSinger(singerId) {
       var _this3 = this;
 
-      this.axios["delete"]("http://localhost:8000/api/singer/".concat(singerId)).then(function (response) {
+      this.axios["delete"]("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/singer/").concat(singerId)).then(function (response) {
         console.log(response); // this.getSingerData()
 
         var i = _this3.singers.map(function (data) {
@@ -23157,6 +23166,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _constant_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../constant/url */ "./resources/js/constant/url.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -23173,7 +23184,7 @@ __webpack_require__.r(__webpack_exports__);
     getGenreData: function getGenreData() {
       var _this = this;
 
-      this.axios.get("http://localhost:8000/api/songsgenre").then(function (response) {
+      this.axios.get("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/songsgenre")).then(function (response) {
         console.log(response);
         _this.genres = response.data.genres;
       })["catch"](function (err) {
@@ -23184,7 +23195,7 @@ __webpack_require__.r(__webpack_exports__);
     addSongGenre: function addSongGenre() {
       var _this2 = this;
 
-      this.axios.post('http://localhost:8000/api/songsgenre', {
+      this.axios.post("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/songsgenre"), {
         genre_name: this.genreName
       }).then(function (response) {
         if (response.data.message) {
@@ -23222,6 +23233,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _constant_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../constant/url */ "./resources/js/constant/url.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -23249,7 +23262,7 @@ __webpack_require__.r(__webpack_exports__);
     getSingerAll: function getSingerAll() {
       var _this = this;
 
-      this.axios.get("http://localhost:8000/api/singer").then(function (response) {
+      this.axios.get("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/singer")).then(function (response) {
         _this.singers = response.data.singers;
       });
     },
@@ -23257,7 +23270,7 @@ __webpack_require__.r(__webpack_exports__);
     getLangAll: function getLangAll() {
       var _this2 = this;
 
-      this.axios.get("http://localhost:8000/api/songslang").then(function (response) {
+      this.axios.get("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/songslang")).then(function (response) {
         _this2.langs = response.data.lang;
         console.log(response);
       })["catch"](function (err) {
@@ -23268,7 +23281,7 @@ __webpack_require__.r(__webpack_exports__);
     getGenreAll: function getGenreAll() {
       var _this3 = this;
 
-      this.axios.get("http://localhost:8000/api/songsgenre").then(function (response) {
+      this.axios.get("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/songsgenre")).then(function (response) {
         _this3.genres = response.data.genres;
         console.log(response);
       })["catch"](function (err) {
@@ -23279,7 +23292,7 @@ __webpack_require__.r(__webpack_exports__);
     addSong: function addSong() {
       var _this4 = this;
 
-      this.axios.post("http://localhost:8000/api/songs", {
+      this.axios.post("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/songs"), {
         song_name: this.songName,
         song_title: this.songTitle,
         song_desc: this.songDesc,
@@ -23323,6 +23336,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _constant_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../constant/url */ "./resources/js/constant/url.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -23350,7 +23365,7 @@ __webpack_require__.r(__webpack_exports__);
     getEditSongData: function getEditSongData(songId) {
       var _this = this;
 
-      this.axios.get("http://localhost:8000/api/songs/".concat(songId, "/edit")).then(function (response) {
+      this.axios.get("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/songs/").concat(songId, "/edit")).then(function (response) {
         console.log(response.data);
         _this.singerId = response.data.song[0].singers_id;
         _this.langId = response.data.song[0].singer_langs_id;
@@ -23368,7 +23383,7 @@ __webpack_require__.r(__webpack_exports__);
     getAllSingerData: function getAllSingerData() {
       var _this2 = this;
 
-      this.axios.get("http://localhost:8000/api/singer").then(function (response) {
+      this.axios.get("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/singer")).then(function (response) {
         console.log(" Song singer ", response);
         _this2.singers = response.data.singers;
       })["catch"](function (err) {
@@ -23378,7 +23393,7 @@ __webpack_require__.r(__webpack_exports__);
     getAllLangData: function getAllLangData() {
       var _this3 = this;
 
-      this.axios.get("http://localhost:8000/api/songslang").then(function (response) {
+      this.axios.get("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/songslang")).then(function (response) {
         console.log(" Songs langs:  ", response);
         _this3.langs = response.data.lang;
       })["catch"](function (err) {
@@ -23388,7 +23403,7 @@ __webpack_require__.r(__webpack_exports__);
     getAllSongGenre: function getAllSongGenre() {
       var _this4 = this;
 
-      this.axios.get("http://localhost:8000/api/songsgenre").then(function (response) {
+      this.axios.get("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/songsgenre")).then(function (response) {
         console.log(" Songs Genres :", response);
         _this4.genres = response.data.genres;
       })["catch"](function (err) {
@@ -23399,7 +23414,7 @@ __webpack_require__.r(__webpack_exports__);
     updateSongData: function updateSongData() {
       var _this5 = this;
 
-      this.axios.put("http://localhost:8000/api/songs/".concat(this.$route.params.songId), {
+      this.axios.put("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/songs/").concat(this.$route.params.songId), {
         songName: this.songName,
         songTitle: this.songTitle,
         songDesc: this.songDesc,
@@ -23435,6 +23450,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _constant_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../constant/url */ "./resources/js/constant/url.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -23450,7 +23467,7 @@ __webpack_require__.r(__webpack_exports__);
     getAllSongs: function getAllSongs() {
       var _this = this;
 
-      this.axios.get("http://localhost:8000/api/songs").then(function (response) {
+      this.axios.get("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/songs")).then(function (response) {
         _this.songs = response.data.song;
         console.log(_this.songs);
       })["catch"](function (err) {
@@ -23461,7 +23478,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteSong: function deleteSong(songId) {
       var _this2 = this;
 
-      this.axios["delete"]("http://localhost:8000/api/songs/".concat(songId)).then(function (response) {
+      this.axios["delete"]("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/songs/").concat(songId)).then(function (response) {
         console.log(response);
 
         if (response.data.message) {
@@ -23487,6 +23504,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _constant_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../constant/url */ "./resources/js/constant/url.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -23504,7 +23523,7 @@ __webpack_require__.r(__webpack_exports__);
     getLangsData: function getLangsData() {
       var _this = this;
 
-      this.axios.get("http://localhost:8000/api/songslang").then(function (response) {
+      this.axios.get("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/songslang")).then(function (response) {
         console.log(response);
         _this.songsLang = response.data.lang;
       })["catch"](function (err) {
@@ -23515,7 +23534,7 @@ __webpack_require__.r(__webpack_exports__);
     addSongLang: function addSongLang() {
       var _this2 = this;
 
-      this.axios.post("http://localhost:8000/api/songslang", {
+      this.axios.post("".concat(_constant_url__WEBPACK_IMPORTED_MODULE_0__.adminUrl, "/songslang"), {
         lang_name: this.langName
       }).then(function (response) {
         console.log(response);
@@ -23599,7 +23618,7 @@ var _hoisted_1 = {
   "class": "text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_1, "The Home Page");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_1, "Dashboard");
 }
 
 /***/ }),
@@ -23631,23 +23650,20 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "card m-3"
 };
+var _hoisted_4 = {
+  "class": "card-header bg-info text-white text-center"
+};
 
-var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "card-header bg-info text-white text-center"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Update Singer")], -1
-  /* HOISTED */
-  );
-});
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Update Singer ");
 
-var _hoisted_5 = {
+var _hoisted_6 = {
   "class": "card-body"
 };
-var _hoisted_6 = {
+var _hoisted_7 = {
   "class": "mb-3"
 };
 
-var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "singerName"
   }, "Singer name:", -1
@@ -23655,22 +23671,10 @@ var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "mb-3"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn btn-success"
-  }, "Update Singer")], -1
-  /* HOISTED */
-  );
-});
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-      return $options.updateSinger && $options.updateSinger.apply($options, arguments);
-    }, ["prevent"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.error), 1
+  /* TEXT */
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "singerName",
     "class": "form-control",
@@ -23679,9 +23683,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.singerName]])]), _hoisted_8], 32
-  /* HYDRATE_EVENTS */
-  )])])])]);
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.singerName]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "btn btn-success",
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.updateSinger && $options.updateSinger.apply($options, arguments);
+    })
+  }, " Update Singer ")])])])]);
 }
 
 /***/ }),
@@ -24667,7 +24674,7 @@ var _hoisted_8 = {
 };
 
 var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "#"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Song name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Song title"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Song description"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Singer name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Song lang"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Song genre"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Image"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Song date"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "#"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Song name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Song title"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Song description"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Singer name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Song lang"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Song genre"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Song date"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     style: {
       "width": "7%"
     }
@@ -24680,7 +24687,11 @@ var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_10 = ["src"];
+var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, "0", -1
+  /* HOISTED */
+  );
+});
 
 var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, "0", -1
@@ -24688,15 +24699,9 @@ var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, "0", -1
-  /* HOISTED */
-  );
-});
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Edit");
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Edit");
-
-var _hoisted_14 = ["onClick"];
+var _hoisted_13 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
@@ -24729,15 +24734,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(song.genre.genre_name), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-      src: song.song_img,
-      alt: "No Image",
-      "class": "img-fluid"
-    }, null, 8
-    /* PROPS */
-    , _hoisted_10)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(song.song_date), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(song.song_date), 1
     /* TEXT */
-    ), _hoisted_11, _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    ), _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
       to: {
         name: 'EditSong',
         params: {
@@ -24747,7 +24746,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "btn btn-primary me-2"
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [_hoisted_13];
+        return [_hoisted_12];
       }),
       _: 2
       /* DYNAMIC */
@@ -24761,7 +24760,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }
     }, "Delete", 8
     /* PROPS */
-    , _hoisted_14)])]);
+    , _hoisted_13)])]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])])])])])]);
@@ -24969,7 +24968,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_view = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-view");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/",
+    to: "/admin/dashboard",
     "class": "nav-link me-2",
     style: {
       "font-size": "22px"
@@ -24982,7 +24981,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/singers",
+    to: "/admin/singers",
     "class": "nav-link me-2",
     style: {
       "font-size": "22px"
@@ -24995,7 +24994,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/song-lang",
+    to: "/admin/song-lang",
     "class": "nav-link me-2",
     style: {
       "font-size": "22px"
@@ -25008,7 +25007,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/song-genre",
+    to: "/admin/song-genre",
     "class": "nav-link me-2",
     style: {
       "font-size": "22px"
@@ -25021,7 +25020,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/songs",
+    to: "/admin/songs",
     "class": "nav-link me-2",
     style: {
       "font-size": "22px"
@@ -25101,6 +25100,21 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/constant/url.js":
+/*!**************************************!*\
+  !*** ./resources/js/constant/url.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "adminUrl": () => (/* binding */ adminUrl)
+/* harmony export */ });
+var adminUrl = 'http://localhost:8000/api/admin'; // localhost url for admin panel
+
+/***/ }),
+
 /***/ "./resources/js/routes/index.js":
 /*!**************************************!*\
   !*** ./resources/js/routes/index.js ***!
@@ -25131,35 +25145,35 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routes = [{
-  path: '/',
+  path: '/admin/dashboard',
   name: 'Home',
   component: _components_HomeView__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
-  path: '/singers',
+  path: '/admin/singers',
   name: 'Singer',
   component: _components_singers_TheSinger__WEBPACK_IMPORTED_MODULE_0__["default"]
 }, {
-  path: '/singers/edit/:singerId',
+  path: '/admin/singers/edit/:singerId',
   name: 'EditSinger',
   component: _components_singers_EditSinger__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
-  path: '/song-lang',
+  path: '/admin/song-lang',
   name: 'SongLang',
   component: _components_songslang_SongsLang__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
-  path: '/song-genre',
+  path: '/admin/song-genre',
   name: 'SongGenre',
   component: _components_songgenre_SongGenre__WEBPACK_IMPORTED_MODULE_4__["default"]
 }, {
-  path: '/songs',
+  path: '/admin/songs',
   name: 'Songs',
   component: _components_songs_Songs__WEBPACK_IMPORTED_MODULE_5__["default"]
 }, {
-  path: '/song/add',
+  path: '/admin/song/add',
   name: 'AddSong',
   component: _components_songs_AddSong__WEBPACK_IMPORTED_MODULE_6__["default"]
 }, {
-  path: '/song/edit/:songId',
+  path: '/admin/song/edit/:songId',
   name: 'EditSong',
   component: _components_songs_EditSong__WEBPACK_IMPORTED_MODULE_7__["default"]
 }];
@@ -30420,7 +30434,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nlabel[data-v-4b87252e],\ninput[data-v-4b87252e],\nbutton[data-v-4b87252e] {\n  font-size: 18px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nlabel[data-v-4b87252e],\ninput[data-v-4b87252e],\nbutton[data-v-4b87252e] {\n    font-size: 18px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

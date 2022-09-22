@@ -35,10 +35,11 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
 });
-
-Route::resource('singer', SingerController::class);
-Route::resource('songslang', SingerLangController::class);
-Route::resource('songsgenre', SongsGenreController::class);
-Route::resource('songs', SongsController::class);
-Route::resource('news', NewsController::class);
-Route::resource('comments', CommentsController::class);
+Route::group(['middleware' => 'api', 'prefix' => 'admin'], function () {
+    Route::resource('singer', SingerController::class);
+    Route::resource('songslang', SingerLangController::class);
+    Route::resource('songsgenre', SongsGenreController::class);
+    Route::resource('songs', SongsController::class);
+    Route::resource('news', NewsController::class);
+    Route::resource('comments', CommentsController::class);
+});

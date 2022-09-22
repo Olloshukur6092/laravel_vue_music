@@ -10,42 +10,42 @@ import EditSong from '../components/songs/EditSong';
 
 const routes = [
     {
-        path: '/',
+        path: '/admin/dashboard',
         name: 'Home',
         component: HomeView,
     },
     {
-        path: '/singers',
+        path: '/admin/singers',
         name: 'Singer',
         component: TheSinger,
     },
     {
-        path: '/singers/edit/:singerId',
+        path: '/admin/singers/edit/:singerId',
         name: 'EditSinger',
         component: EditSinger,
     },
     {
-        path: '/song-lang',
+        path: '/admin/song-lang',
         name: 'SongLang',
         component: SongLang,
     },
     {
-        path: '/song-genre',
+        path: '/admin/song-genre',
         name: 'SongGenre',
         component: SongGenre,
     },
     {
-        path: '/songs',
+        path: '/admin/songs',
         name: 'Songs',
         component: Songs,
     },
     {
-        path: '/song/add',
+        path: '/admin/song/add',
         name: 'AddSong',
         component: AddSong,
     },
     {
-        path: '/song/edit/:songId',
+        path: '/admin/song/edit/:songId',
         name: 'EditSong',
         component: EditSong,
     },

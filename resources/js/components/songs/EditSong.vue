@@ -145,6 +145,7 @@
 </template>
 
 <script>
+import { adminUrl } from '../../constant/url';
 export default {
     data() {
         return {
@@ -171,7 +172,7 @@ export default {
     methods: {
         getEditSongData(songId) {
             this.axios
-                .get(`http://localhost:8000/api/songs/${songId}/edit`)
+                .get(`${adminUrl}/songs/${songId}/edit`)
                 .then((response) => {
                     console.log(response.data);
                     this.singerId = response.data.song[0].singers_id;
@@ -191,7 +192,7 @@ export default {
         // get Singer data
         getAllSingerData() {
             this.axios
-                .get("http://localhost:8000/api/singer")
+                .get(`${adminUrl}/singer`)
                 .then((response) => {
                     console.log(" Song singer ", response);
                     this.singers = response.data.singers;
@@ -202,7 +203,7 @@ export default {
         },
         getAllLangData() {
             this.axios
-                .get("http://localhost:8000/api/songslang")
+                .get(`${adminUrl}/songslang`)
                 .then((response) => {
                     console.log(" Songs langs:  ", response);
                     this.langs = response.data.lang;
@@ -213,7 +214,7 @@ export default {
         },
         getAllSongGenre() {
             this.axios
-                .get("http://localhost:8000/api/songsgenre")
+                .get(`${adminUrl}/songsgenre`)
                 .then((response) => {
                     console.log(" Songs Genres :", response);
                     this.genres = response.data.genres;
@@ -227,7 +228,7 @@ export default {
         updateSongData() {
             this.axios
                 .put(
-                    `http://localhost:8000/api/songs/${this.$route.params.songId}`,
+                    `${adminUrl}/songs/${this.$route.params.songId}`,
                     {
                         songName: this.songName,
                         songTitle: this.songTitle,
